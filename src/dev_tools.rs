@@ -9,6 +9,8 @@ use bevy::{
     prelude::*,
 };
 
+use bevy_rapier2d::prelude::*;
+
 use crate::screens::Screen;
 
 pub(super) fn plugin(app: &mut App) {
@@ -25,6 +27,9 @@ pub(super) fn plugin(app: &mut App) {
     // log FPS to stdout
     use bevy::diagnostic::LogDiagnosticsPlugin;
     app.add_plugins(LogDiagnosticsPlugin::default());
+
+    // physics debugging
+    app.add_plugins(RapierDebugRenderPlugin::default());
 }
 
 const TOGGLE_KEY: KeyCode = KeyCode::Backquote;

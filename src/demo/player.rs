@@ -16,15 +16,18 @@ use crate::{
     screens::Screen,
     AppSet,
 };
+use bevy_rapier2d::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
     app.register_type::<Player>();
 
+    /*
     // Record directional input as movement controls.
     app.add_systems(
         Update,
         record_player_directional_input.in_set(AppSet::RecordInput),
     );
+    */
 }
 
 #[derive(Component, Debug, Clone, Copy, PartialEq, Eq, Default, Reflect)]
@@ -59,54 +62,30 @@ fn spawn_player(
     let texture_atlas_layout = texture_atlas_layouts.add(layout);
     let player_animation = PlayerAnimation::new();
 
-    commands.spawn((
-        Name::new("Player"),
-        Player,
-        SpriteBundle {
-            texture: image_handles[ImageHandles::PATH_DUCKY].clone_weak(),
-            transform: Transform::from_scale(Vec2::splat(8.0).extend(1.0)),
-            ..Default::default()
-        },
-        TextureAtlas {
-            layout: texture_atlas_layout.clone(),
-            index: player_animation.get_atlas_index(),
-        },
-        MovementController {
-            max_speed: config.max_speed,
-            ..default()
-        },
-        ScreenWrap,
-        player_animation,
-        StateScoped(Screen::Playing),
-    ));
-}
-
-fn record_player_directional_input(
-    input: Res<ButtonInput<KeyCode>>,
-    mut controller_query: Query<&mut MovementController, With<Player>>,
-) {
-    // Collect directional input.
-    let mut intent = Vec2::ZERO;
-    if input.pressed(KeyCode::KeyW) || input.pressed(KeyCode::ArrowUp) {
-        intent.y += 1.0;
-    }
-    if input.pressed(KeyCode::KeyS) || input.pressed(KeyCode::ArrowDown) {
-        intent.y -= 1.0;
-    }
-    if input.pressed(KeyCode::KeyA) || input.pressed(KeyCode::ArrowLeft) {
-        intent.x -= 1.0;
-    }
-    if input.pressed(KeyCode::KeyD) || input.pressed(KeyCode::ArrowRight) {
-        intent.x += 1.0;
-    }
-
-    // Normalize so that diagonal movement has the same speed as
-    // horizontal and vertical movement.
-    // This should be omitted if the input comes from an analog stick instead.
-    let intent = intent.normalize_or_zero();
-
-    // Apply movement intent to controllers.
-    for mut controller in &mut controller_query {
-        controller.intent = intent;
-    }
+    commands
+        .spawn((
+            Name::new("Player"),
+            Player,
+            SpriteBundle {
+                texture: image_handles[ImageHandles::PATH_DUCKY].clone_weak(),
+                transform: Transform::from_scale(Vec2::splat(8.0).extend(1.0)),
+                ..Default::default()
+            },
+            TextureAtlas {
+                layout: texture_atlas_layout.clone(),
+                index: player_animation.get_atlas_index(),
+            },
+            /*
+            MovementController {
+                max_speed: config.max_speed,
+                ..default()
+            },
+            */
+            ScreenWrap,
+            player_animation,
+            StateScoped(Screen::Playing),
+        ))
+        .insert(RigidBody::KinematicPositionBased)
+        .insert(Collider::ball(0.5))
+        .insert(KinematicCharacterController::default());
 }

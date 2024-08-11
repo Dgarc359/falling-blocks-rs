@@ -2,9 +2,11 @@
 
 use bevy::{ecs::world::Command, prelude::*};
 
+use super::levels;
 use super::player::SpawnPlayer;
 
-pub(super) fn plugin(_app: &mut App) {
+pub(super) fn plugin(app: &mut App) {
+    app.add_plugins(levels::plugin);
     // No setup required for this plugin.
     // It's still good to have a function here so that we can add some setup
     // later if needed.

@@ -7,14 +7,20 @@ use bevy::prelude::*;
 
 mod animation;
 pub mod level;
+mod levels;
 mod movement;
+mod physics;
 mod player;
 
 pub(super) fn plugin(app: &mut App) {
+    // set timestep rate for fixed timestep subsystems
+    app.insert_resource(Time::<Fixed>::from_hz(1000.0));
+
     app.add_plugins((
         animation::plugin,
-        movement::plugin,
+        //movement::plugin,
         player::plugin,
         level::plugin,
+        physics::plugin,
     ));
 }
