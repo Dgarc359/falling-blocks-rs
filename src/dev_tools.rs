@@ -21,6 +21,10 @@ pub(super) fn plugin(app: &mut App) {
         Update,
         toggle_debug_ui.run_if(input_just_pressed(TOGGLE_KEY)),
     );
+
+    // log FPS to stdout
+    use bevy::diagnostic::LogDiagnosticsPlugin;
+    app.add_plugins(LogDiagnosticsPlugin::default());
 }
 
 const TOGGLE_KEY: KeyCode = KeyCode::Backquote;

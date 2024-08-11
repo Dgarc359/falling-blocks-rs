@@ -38,7 +38,7 @@ impl FromWorld for ImageHandles {
             settings.sampler = ImageSampler::nearest();
         };
 
-        let pixel_art_paths = [Self::PATH_DUCKY];
+        let pixel_art_paths = [Self::PATH_DUCKY, Self::PATH_RED_SQUARE];
         let map = pixel_art_paths
             .into_iter()
             .map(|path| {
