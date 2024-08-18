@@ -36,8 +36,7 @@ pub struct Player;
 /// A command to spawn the player character.
 #[derive(Debug)]
 pub struct SpawnPlayer {
-    /// See [`MovementController::max_speed`].
-    pub max_speed: f32,
+    pub _max_speed: f32,
 }
 
 impl Command for SpawnPlayer {
