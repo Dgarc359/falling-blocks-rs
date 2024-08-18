@@ -1,7 +1,4 @@
-use bevy::{
-    ecs::{system::RunSystemOnce as _, world::Command},
-    prelude::*,
-};
+use bevy::{prelude::*, ecs::world::Command};
 
 mod level_one;
 
@@ -18,4 +15,14 @@ pub(super) fn plugin(app: &mut App) {
 pub enum Levels {
     #[default]
     LevelOne,
+}
+
+#[derive(Debug)]
+pub struct SpawnLevelOrchestrator;
+
+impl Command for SpawnLevelOrchestrator {
+    fn apply(self, world: &mut World) {
+        println!("level orchestrator spawned");
+        world.commands().add(level_one::SpawnLevelOne {});
+    }
 }

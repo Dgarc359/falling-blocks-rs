@@ -11,10 +11,9 @@ use crate::{
     assets::ImageHandles,
     demo::{
         animation::PlayerAnimation,
-        movement::{MovementController, ScreenWrap},
+        movement::ScreenWrap,
     },
     screens::Screen,
-    AppSet,
 };
 use bevy_rapier2d::prelude::*;
 
@@ -48,7 +47,7 @@ impl Command for SpawnPlayer {
 }
 
 fn spawn_player(
-    In(config): In<SpawnPlayer>,
+    In(_config): In<SpawnPlayer>,
     mut commands: Commands,
     image_handles: Res<ImageHandles>,
     mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,

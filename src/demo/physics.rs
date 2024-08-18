@@ -9,6 +9,7 @@ pub(super) fn plugin(app: &mut App) {
     app.register_type::<Physics>();
     app.add_plugins(RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(100.0));
     app.add_systems(
+        // meant to be called at consistent timesteps
         FixedUpdate,
         (
             update_system,
@@ -17,22 +18,22 @@ pub(super) fn plugin(app: &mut App) {
     );
 }
 
-fn update_system(time: Res<Time>, mut controllers: Query<&mut KinematicCharacterController>) {
-    //dbg!("time delta: {:?}",time.delta());
+fn update_system(_time: Res<Time>, mut controllers: Query<&mut KinematicCharacterController>) {
     for mut controller in controllers.iter_mut() {
-        //dbg!(&controller.translation);
         // add gravity to kinematic body
         controller.translation = Some(Vec2::new(0.0, -2.0));
     }
 }
 
 fn read_result_system(controllers: Query<(Entity, &KinematicCharacterControllerOutput)>) {
-    for (entity, output) in controllers.iter() {
+    for (_entity, _output) in controllers.iter() {
+        /*
         dbg!(
             "Entity {:?} moved by {:?} and touches the ground: {:?}",
             entity,
             output.effective_translation,
             output.grounded
         );
+        */
     }
 }

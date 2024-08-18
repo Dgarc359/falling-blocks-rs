@@ -7,6 +7,6 @@ use falling_blocks::AppPlugin;
 fn main() -> AppExit {
     App::new()
         .add_plugins(AppPlugin)
-        .add_plugins(FrameTimeDiagnosticsPlugin::default())
+        .add_plugins(FrameTimeDiagnosticsPlugin)
         .run()
 }
