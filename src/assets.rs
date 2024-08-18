@@ -27,6 +27,7 @@ pub struct ImageHandles(HashMap<String, Handle<Image>>);
 impl ImageHandles {
     pub const PATH_DUCKY: &'static str = "images/ducky.png";
     pub const PATH_RED_SQUARE: &'static str = "images/red-square.png";
+    pub const PATH_TEXTUREMAP: &'static str = "images/tilemap-01-atlas.png";
 }
 
 impl FromWorld for ImageHandles {

@@ -26,3 +26,8 @@ impl Command for SpawnLevelOrchestrator {
         world.commands().add(level_one::SpawnLevelOne {});
     }
 }
+
+// Maybe some type of query on some level state can give us what we need to
+// switch levels around, for now, we're starting with spawning level one...
+// We'll need to make sure that it gets cleaned up correctly if we need to spawn
+// another level

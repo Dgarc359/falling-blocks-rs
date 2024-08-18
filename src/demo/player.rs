@@ -68,6 +68,7 @@ fn spawn_player(
             },
             TextureAtlas {
                 layout: texture_atlas_layout.clone(),
+                // the index of the animation tells us what texture to display
                 index: player_animation.get_atlas_index(),
             },
             /*
