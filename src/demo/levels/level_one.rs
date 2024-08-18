@@ -17,6 +17,11 @@ impl Command for SpawnLevelOne {
 
 fn create_level_entities() -> Vec<CustomEntityComponent> {
     let entities: Vec<CustomEntityComponent> = vec![];
+    // use texture atlas (check player.rs for sample impl)
+    // spawn a cup-shaped arena of made static objects
+    // x blocks wide and y blocks high
+    // eventually, allow this variable to be modified from a higher place
+    // add them to the `entities` vec
 
     entities
 }
