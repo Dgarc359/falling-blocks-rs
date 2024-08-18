@@ -6,8 +6,8 @@
 use bevy::prelude::*;
 
 mod animation;
-pub mod level;
 mod custom_entities;
+pub mod level;
 mod levels;
 mod movement;
 mod physics;

@@ -1,8 +1,7 @@
-use bevy::{prelude::*, ecs::world::Command};
+use bevy::{ecs::world::Command, prelude::*};
 // TODO: figure out how to fix the import here if at all possible
 use super::super::custom_entities::{get_entity_to_spawn, CustomEntities, CustomEntityComponent};
 pub(super) fn plugin(_app: &mut App) {}
-
 
 #[derive(Debug)]
 pub struct SpawnLevelOne;
@@ -10,12 +9,13 @@ pub struct SpawnLevelOne;
 impl Command for SpawnLevelOne {
     fn apply(self, world: &mut World) {
         world.commands().spawn_batch(create_level_entities());
-        world.commands().spawn(get_entity_to_spawn(CustomEntities::Block32Px));
+        world
+            .commands()
+            .spawn(get_entity_to_spawn(CustomEntities::Block32Px));
     }
 }
 
-fn create_level_entities() -> Vec<CustomEntityComponent>
-{
+fn create_level_entities() -> Vec<CustomEntityComponent> {
     let entities: Vec<CustomEntityComponent> = vec![];
 
     entities

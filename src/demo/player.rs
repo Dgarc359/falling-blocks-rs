@@ -9,10 +9,7 @@ use bevy::{
 
 use crate::{
     assets::ImageHandles,
-    demo::{
-        animation::PlayerAnimation,
-        movement::ScreenWrap,
-    },
+    demo::{animation::PlayerAnimation, movement::ScreenWrap},
     screens::Screen,
 };
 use bevy_rapier2d::prelude::*;

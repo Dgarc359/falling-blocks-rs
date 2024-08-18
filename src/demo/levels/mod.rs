@@ -1,4 +1,4 @@
-use bevy::{prelude::*, ecs::world::Command};
+use bevy::{ecs::world::Command, prelude::*};
 
 mod level_one;
 
